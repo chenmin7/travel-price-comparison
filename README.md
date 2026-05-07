@@ -267,7 +267,7 @@ const trainDataSource = {
 
 - 项目主页：[https://github.com/yourusername/travel-price-comparison](https://github.com/yourusername/travel-price-comparison)
 - 问题反馈：[https://github.com/yourusername/travel-price-comparison/issues](https://github.com/yourusername/travel-price-comparison/issues)
-- 邮箱：your.email@example.com
+- 邮箱：1287183332@qq.com
 
 ---
 
