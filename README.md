@@ -181,16 +181,16 @@ GET /api/compare?from=北京&to=上海&date=2024-01-01&travelers=2&days=3
 ## 🎨 界面预览
 
 ### 首页
-![首页截图](assets/screenshots/home.png)
+
 
 ### 交通比价
-![交通截图](assets/screenshots/transport.png)
+
 
 ### 酒店比价
-![酒店截图](assets/screenshots/hotel.png)
+
 
 ### 费用汇总
-![汇总截图](assets/screenshots/summary.png)
+
 
 ## 🔧 配置说明
 
@@ -267,7 +267,7 @@ const trainDataSource = {
 
 - 项目主页：[https://github.com/yourusername/travel-price-comparison](https://github.com/yourusername/travel-price-comparison)
 - 问题反馈：[https://github.com/yourusername/travel-price-comparison/issues](https://github.com/yourusername/travel-price-comparison/issues)
-- 邮箱：your.email@example.com
+- 邮箱：1287183332@qq.com
 
 ---
 
