@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>穷游费用对比系统 Pro - 实时数据版</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">🎒</div>
+            <h1>穷游费用对比系统 Pro</h1>
+            <p>智能规划 · 实时数据 · 全网比价 · 一键预订</p>
+            <div class="live-badge">
+                <span class="live-dot"></span>
+                <span>实时数据更新中</span>
+            </div>
+        </div>
+
+        <!-- 行程信息 -->
+        <div class="card">
+            <h2 class="card-title">
+                <div class="icon-wrapper">📍</div>
+                行程信息
+            </h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>出发城市</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🚀</span>
+                        <select id="fromCity">
+                            <option value="">请选择出发城市</option>
+                            <option value="北京">北京</option>
+                            <option value="上海">上海</option>
+                            <option value="广州">广州</option>
+                            <option value="深圳">深圳</option>
+                            <option value="杭州">杭州</option>
+                            <option value="成都">成都</option>
+                            <option value="西安">西安</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>目的地城市</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🎯</span>
+                        <select id="toCity">
+                            <option value="">请选择目的地</option>
+                            <option value="北京">北京</option>
+                            <option value="上海">上海</option>
+                            <option value="广州">广州</option>
+                            <option value="深圳">深圳</option>
+                            <option value="杭州">杭州</option>
+                            <option value="成都">成都</option>
+                            <option value="西安">西安</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>出发日期</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">📅</span>
+                        <input type="date" id="travelDate">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>出行人数</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">👥</span>
+                        <input type="number" id="travelers" value="1" min="1" max="10">
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>住宿天数</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🌙</span>
+                        <input type="number" id="stayDays" value="2" min="1" max="30">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>入住日期</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🏨</span>
+                        <input type="date" id="checkinDate">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>餐饮预算/天</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">💰</span>
+                        <input type="number" id="foodBudget" value="100" min="0" placeholder="元/人/天">
+                    </div>
+                </div>
+            </div>
+            <div class="btn-wrapper">
+                <button class="btn" onclick="searchAll()">
+                    <span>🔍</span>
+                    全网比价搜索
+                </button>
+                <button class="btn btn-secondary" onclick="showPromotions()">
+                    <span>🎁</span>
+                    查看优惠活动
+                </button>
+            </div>
+        </div>
+
+        <!-- 优惠活动 -->
+        <div id="promotionsSection" style="display:none;">
+            <div class="section-title">🎁 限时优惠活动</div>
+            <div class="results-grid" id="promotionsGrid">
+            </div>
+        </div>
+
+        <!-- 交通方案 -->
+        <div id="transportSection" style="display:none;">
+            <div class="section-title">🚄 交通方案对比</div>
+            <div id="transportResults">
+            </div>
+        </div>
+
+        <!-- 住宿方案 -->
+        <div id="hotelSection" style="display:none;">
+            <div class="section-title">🏨 住宿方案对比</div>
+            <div class="results-grid" id="hotelResults">
+            </div>
+        </div>
+
+        <!-- 景点推荐 -->
+        <div id="attractionSection" style="display:none;">
+            <div class="section-title">🎫 景点门票推荐</div>
+            <div class="results-grid" id="attractionResults">
+            </div>
+        </div>
+
+        <!-- 费用汇总 -->
+        <div class="summary-card" id="summaryCard" style="display:none;">
+            <h2 class="summary-title">
+                <span>💰</span>
+                费用汇总
+            </h2>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="label">🚄 最省交通</div>
+                    <div class="value" id="minTransport">-</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">🏨 最省住宿</div>
+                    <div class="value" id="minHotel">-</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">🎫 景点门票</div>
+                    <div class="value" id="totalAttraction">-</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">🍜 餐饮预算</div>
+                    <div class="value" id="totalFood">-</div>
+                </div>
+                <div class="summary-item highlight">
+                    <div class="label">✨ 最低总预算</div>
+                    <div class="value" id="minTotal">-</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">🌟 舒适总预算</div>
+                    <div class="value" id="comfortTotal">-</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
